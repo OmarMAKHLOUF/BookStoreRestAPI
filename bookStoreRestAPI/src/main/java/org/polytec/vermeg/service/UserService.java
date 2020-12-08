@@ -3,6 +3,7 @@ package org.polytec.vermeg.service;
  import java.util.List;
 
 import org.polytec.vermeg.dao.UserDAO;
+import org.polytec.vermeg.model.Order;
 import org.polytec.vermeg.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserService {
 	}
 	//delete
 	@Transactional
-	public void deleteUser(int id) {
-		UserDao.deleteUser(id);
+	public void delete(User user) {
+		this.UserDao.deleteUser(user);
 	}
 }

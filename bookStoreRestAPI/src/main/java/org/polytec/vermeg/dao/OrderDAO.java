@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.polytec.vermeg.model.Book;
 import org.polytec.vermeg.model.Order;
  import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,12 +49,14 @@ public class OrderDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(order);
 	}
+	 
 
-	public void deleteOrder(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Order b = (Order) session.load(Order.class, new Integer(id));
-		if (null != b) {
-			session.delete(b);
-		}
-	}	
+	public void deleteOrder(Order object) {
+		if (object instanceof Order)
+			this.sessionFactory.getCurrentSession().delete((Order)object);
+	}
+	
+	
+	
+	
 }

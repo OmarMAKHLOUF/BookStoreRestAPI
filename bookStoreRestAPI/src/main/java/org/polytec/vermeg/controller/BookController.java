@@ -3,7 +3,8 @@ package org.polytec.vermeg.controller;
 import java.util.List;
 
 import org.polytec.vermeg.model.Book;
- import org.polytec.vermeg.service.BookService;
+import org.polytec.vermeg.model.Order;
+import org.polytec.vermeg.service.BookService;
  import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,20 +55,23 @@ public class BookController {
 		return "redirect:/getAllBooks";
 	}
 
-	@RequestMapping(value = "/updateBook/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String updateCountry(@PathVariable("id") int id,Model model) {
-		 model.addAttribute("Book", this.bookService.getBook(id));
-	        model.addAttribute("listOfbooks", this.bookService.getAllBooks());
+	
+	
+
+	
+	
+	@RequestMapping(value = "/updateBook", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public String updateBook(@RequestBody Book book) {
+			this.bookService.updateBook(book);
 	        return "bookDetails";
 	}
 
-	@RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String deleteBook(@PathVariable("id") int id) {
-		bookService.deleteBook(id);
-		 return "redirect:/getAllBooks";
-
-	}	
+	@RequestMapping(method = RequestMethod.DELETE, value = " /delete")
+	public void delete(@RequestBody Book book) {
+		this.bookService.delete (book);
+	}
 	
+	 
 	@RequestMapping(value = "/calculerPrice/{id}/{quantity}", method = RequestMethod.GET, headers = "Accept=application/json")
     public double calculerPrice(@PathVariable int id, @PathVariable int quantity) {	
 	double priceUnit = bookService.getBook(id).getPrice();

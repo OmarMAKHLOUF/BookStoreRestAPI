@@ -45,12 +45,12 @@ public class BookDAO {
 		session.update(book);
 	}
 
-	public void deleteBook(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Book b = (Book) session.load(Book.class, new Integer(id));
-		if (null != b) {
-			session.delete(b);
-		}
+	 
+
+	 
+	public void deleteBook(Book object) {
+		if (object instanceof Book)
+			this.sessionFactory.getCurrentSession().delete((Book)object);
 	}
 
 	 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.polytec.vermeg.model.Book;
 import org.polytec.vermeg.model.User;
  import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,11 +47,12 @@ public class UserDAO {
 		session.update(user);
 	}
 
-	public void deleteUser(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		User b = (User) session.load(User.class, new Integer(id));
-		if (null != b) {
-			session.delete(b);
-		}
-	}	
+ 
+	
+	public void deleteUser(User object) {
+		if (object instanceof User)
+			this.sessionFactory.getCurrentSession().delete((User)object);
+	}
+	
+	
 }

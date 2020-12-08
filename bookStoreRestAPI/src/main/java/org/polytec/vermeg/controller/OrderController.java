@@ -2,6 +2,7 @@ package org.polytec.vermeg.controller;
 
 import java.util.List;
 
+import org.polytec.vermeg.model.Book;
 import org.polytec.vermeg.model.Order;
 import org.polytec.vermeg.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,24 @@ public class OrderController {
 		return "redirect:/getAllOrders";
 	}
 
-	@RequestMapping(value = "/updateOrder/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String updateCountry(@PathVariable("id") int id,Model model) {
-		 model.addAttribute("Order", this.orderService.getOrder(id));
-	        model.addAttribute("listOforders", this.orderService.getAllOrders());
-	        return "orderDetails";
+	@RequestMapping(value = "/updateOrder ", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public String updateOrder(@RequestBody Order order) {
+		this.orderService.updateOrder(order);
+        return "orderDetails";
+}
+	
+	
+ 
+
+	 
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = " /delete")
+	public void delete(@RequestBody Order order) {
+		this.orderService.delete(order);
 	}
-
-	@RequestMapping(value = "/deleteOrder/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String deleteOrder(@PathVariable("id") int id) {
-		orderService.deleteOrder(id);
-		 return "redirect:/getAllOrders";
-
-	}	
+	
+	
+	
 	
 	
 }

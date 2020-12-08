@@ -37,7 +37,7 @@ public class BookService {
 	}
 	//delete
 	@Transactional
-	public void deleteBook(int id) {
-		BookDao.deleteBook(id);
+	public void delete(Book book) {
+		this.BookDao.deleteBook(book);
 	}
 }
